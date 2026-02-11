@@ -2,22 +2,38 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'robotframework',
+                    url: 'https://github.com/pendaleye/miniprojet.git'
+            }
+        }
+
         stage('Install dependencies') {
             steps {
-                sh 'pip install robotframework'
+                bat """
+                pip install --upgrade pip
+                pip install robotframework
+                pip install robotframework-seleniumlibrary
+                pip install selenium
+                """
             }
         }
 
         stage('Run Robot Tests') {
             steps {
-                sh 'robot -d results tests/'
+                bat """
+                robot -d results tests/
+                """
             }
         }
+    }
 
-        stage('Publish Robot Results') {
-            steps {
-                robot outputPath: 'results'
-            }
+    post {
+        always {
+            archiveArtifacts artifacts: 'results/**/*.*', fingerprint: true
+            junit 'results/output.xml'
         }
     }
 }
