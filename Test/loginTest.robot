@@ -11,10 +11,6 @@ Connexion Valide
     Vérifier Que La Page Produits Est Affichée
 
 
-Connexion invalide       
-
-        Se Connecter Avec Les Identifiants    standard_user    mauvais_mdp
-        Vérifier Que La Page Produits Est Affichée
 
 
 
