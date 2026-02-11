@@ -24,7 +24,7 @@ pipeline {
         stage('Run Robot Tests') {
             steps {
                 bat """
-                robot -d results tests/
+                robot -d results Test/
                 """
             }
         }
@@ -37,3 +37,4 @@ pipeline {
         }
     }
 }
+
